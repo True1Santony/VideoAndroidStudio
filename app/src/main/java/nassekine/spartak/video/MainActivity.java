@@ -2,6 +2,7 @@ package nassekine.spartak.video;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -49,7 +50,18 @@ public class MainActivity extends AppCompatActivity {
                 vwReproductor.setVideoURI(uri);
                 vwReproductor.setMediaController(mediaController);
                 mediaController.setAnchorView(vwReproductor);
-                vwReproductor.start();
+
+
+                vwReproductor.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+
+                        vwReproductor.start();
+
+                        mp.setLooping(true);
+                    }
+                });
+
             }
         });
 
