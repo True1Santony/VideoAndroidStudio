@@ -6,12 +6,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.MediaController;
 import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
 
     Button btnReproducir;
     VideoView vwReproductor;
+    MediaController mediaController;
 
 
     @Override
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnReproducir=findViewById(R.id.btnReproducir);
         vwReproductor=findViewById(R.id.vwReproductor);
+        mediaController=new MediaController(this);
 
         btnReproducir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
                 Uri uri= Uri.parse(rutaVideo);
 
                 vwReproductor.setVideoURI(uri);
+                vwReproductor.setMediaController(mediaController);
+                mediaController.setAnchorView(vwReproductor);
                 vwReproductor.start();
             }
         });
